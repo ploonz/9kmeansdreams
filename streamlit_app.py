@@ -19,7 +19,7 @@ with col1:
     avg_price=client_data['price'].mean()
     state=client_data['state'].to_string(index=False)
     st.subheader("📋 Информация о клиенте")
-    st.metric(f"Штат",f"{state}")
+    st.metric(f"Штат",f"{state[0]}")
     st.metric(f"Средняя стоимость заказа",f"${avg_price}")
 with col2:
     risk = df[df["customer_id"] == client_id]["cluster"].values[0]
