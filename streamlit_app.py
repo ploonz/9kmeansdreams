@@ -4,7 +4,7 @@ import pandas as pd
 st.set_page_config(page_title="Сегментация клиентов", layout="wide")
 
 cleandf=pd.read_csv('clean_dataset.csv', index_col=False)
-df=pd.read_csv('final_data (1).csv',index_col=False)
+df=pd.read_csv('final_data.csv',index_col=False)
 df['customer_id']=cleandf['customer_unique_id']
 df['state']=cleandf['customer_state']
 st.title("Сегментация клиентов")
