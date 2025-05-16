@@ -13,13 +13,14 @@ with col1:
     client_id = st.selectbox(
     "Выберите клиента",
     sorted(df['customer_id'].unique()),
-    key="client_select"
+    key="client_select",
+    index=None
     )
     client_data=df[df['customer_id']==client_id]
     avg_price=client_data['price'].mean()
-    state=client_data['state'].to_string(index=False)
+    state=client_data['state'].to_string(index=False).split(':')[0]
     st.subheader("📋 Информация о клиенте")
-    st.metric(f"Штат",f"{state[0]}")
+    st.metric(f"Штат",f"{state}")
     st.metric(f"Средняя стоимость заказа",f"${avg_price}")
 with col2:
     risk = df[df["customer_id"] == client_id]["cluster"].values[0]
