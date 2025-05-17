@@ -11,8 +11,7 @@ with col1:
     client_id = st.selectbox(
     "Выберите клиента",
     sorted(df['customer_id'].unique()),
-    key="client_select",
-    index=None
+    key="client_select"
     )
     client_data=df[df['customer_id']==client_id]
     avg_price=client_data['price'].mean()
