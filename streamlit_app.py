@@ -3,10 +3,8 @@ import pandas as pd
 
 st.set_page_config(page_title="Сегментация клиентов", layout="wide")
 
-cleandf=pd.read_csv('clean_dataset.csv', index_col=False)
-df=pd.read_csv('final_data.csv',index_col=False)
-df['customer_id']=cleandf['customer_unique_id']
-df['state']=cleandf['customer_state']
+
+df=pd.read_csv('from_model_opt.csv')
 st.title("Сегментация клиентов")
 col1, col2 = st.columns([1.5, 3])
 with col1:
