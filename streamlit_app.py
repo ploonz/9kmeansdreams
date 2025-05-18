@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-st.set_page_config(page_title="Сегментация клиентов 2", layout="wide")
+st.set_page_config(page_title="Сегментация клиентов", layout="wide")
 BRAZIL_STATES = {
     'AC': 'Acre',
     'AL': 'Alagoas',
