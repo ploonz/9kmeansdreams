@@ -3,8 +3,12 @@ import pandas as pd
 
 st.set_page_config(page_title="Сегментация клиентов", layout="wide")
 
+@st.cache_data
+def load_data():
+    return pd.read_csv('from_model_opt.csv')
 
-df=pd.read_csv('from_model_opt.csv')
+df = load_data()
+
 st.title("Сегментация клиентов")
 col1, col2 = st.columns([1.5, 3])
 with col1:
@@ -15,7 +19,7 @@ with col1:
     )
     client_data=df[df['customer_id']==client_id]
     avg_price=client_data['price'].mean()
-    state=client_data['state'].to_string(index=False).split(':')[0]
+    state=client_data['state'].to_string(index=False)
     st.subheader("📋 Информация о клиенте")
     st.metric(f"Штат",f"{state}")
     st.metric(f"Средняя стоимость заказа",f"${avg_price}")
