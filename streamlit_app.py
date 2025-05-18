@@ -2,6 +2,35 @@ import streamlit as st
 import pandas as pd
 
 st.set_page_config(page_title="Сегментация клиентов", layout="wide")
+BRAZIL_STATES = {
+    'AC': 'Acre',
+    'AL': 'Alagoas',
+    'AP': 'Amapá',
+    'AM': 'Amazonas',
+    'BA': 'Bahia',
+    'CE': 'Ceará',
+    'DF': 'Distrito Federal',
+    'ES': 'Espírito Santo',
+    'GO': 'Goiás',
+    'MA': 'Maranhão',
+    'MT': 'Mato Grosso',
+    'MS': 'Mato Grosso do Sul',
+    'MG': 'Minas Gerais',
+    'PA': 'Pará',
+    'PB': 'Paraíba',
+    'PR': 'Paraná',
+    'PE': 'Pernambuco',
+    'PI': 'Piauí',
+    'RJ': 'Rio de Janeiro',
+    'RN': 'Rio Grande do Norte',
+    'RS': 'Rio Grande do Sul',
+    'RO': 'Rondônia',
+    'RR': 'Roraima',
+    'SC': 'Santa Catarina',
+    'SP': 'São Paulo',
+    'SE': 'Sergipe',
+    'TO': 'Tocantins'
+}
 
 @st.cache_data
 def load_data():
@@ -17,12 +46,13 @@ with col1:
     sorted(df['customer_id'].unique()),
     key="client_select"
     )
+    
+    st.subheader("📋 Информация о клиенте")
     client_data=df[df['customer_id']==client_id]
     avg_price=client_data['price'].mean()
-    state=client_data['state'].to_string(index=False)
-    st.subheader("📋 Информация о клиенте")
-    st.metric(f"Штат",f"{state}")
-    st.metric(f"Средняя стоимость заказа",f"${avg_price}")
+
+    st.metric(f"Штат",f"{BRAZIL_STATES.get(client_data['state'].to_string(index=False).split()[0], client_data['state'].to_string(index=False).split()[0])}")
+    st.metric(f"Средняя стоимость заказа",f"R${avg_price}")
 with col2:
     risk = df[df["customer_id"] == client_id]["cluster"].values[0]
     if risk==-1:
